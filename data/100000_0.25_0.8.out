@@ -1,0 +1,22 @@
+Inst number: 1853 Instruction: a T3 O1853 S11 N8 heap size: 100000 live_Object_size_before GC: 99985 live_object_size_after_gc: 73986
+Inst number: 2283 Instruction: a T2 O2283 S48 N8 heap size: 100000 live_Object_size_before GC: 96766 live_object_size_after_gc: 83603
+Inst number: 3020 Instruction: a T4 O3020 S8 N5 heap size: 125000 live_Object_size_before GC: 123154 live_object_size_after_gc: 105369
+Inst number: 3910 Instruction: a T4 O3910 S51 N6 heap size: 156250 live_Object_size_before GC: 154051 live_object_size_after_gc: 114252
+Inst number: 4603 Instruction: a T2 O4603 S62 N9 heap size: 156250 live_Object_size_before GC: 150997 live_object_size_after_gc: 127425
+Inst number: 5776 Instruction: a T3 O5776 S56 N9 heap size: 195312 live_Object_size_before GC: 191580 live_object_size_after_gc: 158302
+Inst number: 7272 Instruction: a T3 O7272 S41 N9 heap size: 244140 live_Object_size_before GC: 240252 live_object_size_after_gc: 196906
+Inst number: 9179 Instruction: a T2 O9179 S54 N10 heap size: 305175 live_Object_size_before GC: 300733 live_object_size_after_gc: 228765
+Inst number: 10431 Instruction: a T3 O10431 S57 N10 heap size: 305175 live_Object_size_before GC: 295844 live_object_size_after_gc: 206322
+Inst number: 12037 Instruction: a T0 O12037 S32 N9 heap size: 305175 live_Object_size_before GC: 294149 live_object_size_after_gc: 251676
+Inst number: 14294 Instruction: a T4 O14294 S29 N10 heap size: 381468 live_Object_size_before GC: 373441 live_object_size_after_gc: 217282
+Inst number: 17122 Instruction: a T1 O17122 S57 N5 heap size: 381468 live_Object_size_before GC: 370484 live_object_size_after_gc: 326662
+Inst number: 19747 Instruction: a T2 O19747 S38 N8 heap size: 476835 live_Object_size_before GC: 468158 live_object_size_after_gc: 431113
+Inst number: 22679 Instruction: a T3 O22679 S13 N10 heap size: 596043 live_Object_size_before GC: 588160 live_object_size_after_gc: 544855
+Inst number: 26240 Instruction: a T2 O26240 S36 N8 heap size: 745053 live_Object_size_before GC: 736813 live_object_size_after_gc: 681234
+Inst number: 30701 Instruction: a T1 O30701 S40 N4 heap size: 931316 live_Object_size_before GC: 921581 live_object_size_after_gc: 855518
+Inst number: 36190 Instruction: a T3 O36190 S17 N8 heap size: 1164145 live_Object_size_before GC: 1152997 live_object_size_after_gc: 534561
+Inst number: 47343 Instruction: a T3 O47343 S51 N9 heap size: 1164145 live_Object_size_before GC: 1138258 live_object_size_after_gc: 285328
+Inst number: 63315 Instruction: a T2 O63315 S47 N9 heap size: 1164145 live_Object_size_before GC: 1150165 live_object_size_after_gc: 533771
+Inst number: 74461 Instruction: a T3 O74461 S62 N2 heap size: 1164145 live_Object_size_before GC: 1137778 live_object_size_after_gc: 704934
+Inst number: 82345 Instruction: a T0 O82345 S60 N9 heap size: 1164145 live_Object_size_before GC: 1128791 live_object_size_after_gc: 656572
+execution complete 
