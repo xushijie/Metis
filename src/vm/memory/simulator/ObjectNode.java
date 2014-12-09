@@ -19,7 +19,7 @@ public class ObjectNode extends Node {
 	
 	//Below fields are used for smart allocation.. 
 	PC _pc;   //PC that allocates this object
-	Set<PC> _childPC = new LinkedHashSet<PC>();
+	Set<PC> _parentPCs = new LinkedHashSet<PC>();
 	
 	public ObjectNode(MyThread thread, int payout, int references, int id, int start){
 		super(start, payout + 4* references, id);
@@ -91,8 +91,11 @@ public class ObjectNode extends Node {
 		}else if(Heap._gcKind == GCKind.SMART){
 			//Mark sweep with smart allocation
 			ObjectNode orig = (ObjectNode) _referNodes[index];
-			removeChildPC(orig);
-			addNewChildPC(target);
+			if(orig!=null){
+				orig.removeParentPC(this);
+				target.addNewParentPC(this);	
+			}
+			
 		}
 		
 		_referNodes[index] = target;
@@ -106,7 +109,7 @@ public class ObjectNode extends Node {
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
-		builder.append(super.toString()).append(", color:"+_color.toString());
+		builder.append(super.toString()).append(", color:"+_color.toString()).append(" len: "+this._length);
 		return builder.toString();
 		
 	}
@@ -203,23 +206,23 @@ public class ObjectNode extends Node {
 	 *  Tracks all 
 	 * @return
 	 */
-	public Set<PC> getChildPC() {
-		return  _childPC;
+	public Set<PC> getParentPCs() {
+		return  _parentPCs;
 	}
 
-	private void addNewChildPC(ObjectNode target) {
-		_childPC.add(target.getPC());
+	private void addNewParentPC(ObjectNode target) {
+		_parentPCs.add(target.getPC());
 	}
 	
-	private void removeChildPC(ObjectNode target) {
-		if(target!=null)
-		_childPC.remove(target.getPC());
+	private void removeParentPC(ObjectNode target) {
+		_parentPCs.remove(target.getPC());
 	}
 	public void setPC(BaseInst instr) {
 		_pc = new PC(instr);
 	}
 
 	public PC getPC(){
+		
 		return _pc;
 	}
 }

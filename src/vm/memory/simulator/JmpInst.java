@@ -20,6 +20,7 @@ public class JmpInst extends BaseInst {
 			
 			if(count++>=1){
 				SmartAgent.getAgent().activate();
+				Heap.getHeap().clear();
 			}
 			
 			System.out.println("This is "+ (SmartAgent.getAgent().isProfilePhase()?"Profile":"Activation"));

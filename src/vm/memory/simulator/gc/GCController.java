@@ -7,6 +7,7 @@ import java.util.Set;
 
 import vm.memory.simulator.GCKind;
 import vm.memory.simulator.ObjectNode;
+import vm.memory.simulator.smartallocation.SmartAgent;
 
 
 public class GCController {
@@ -24,6 +25,7 @@ public class GCController {
 		_actions.put(GCKind.COPY_REFERENCE, new CopyReferenceGC());
 		_actions.put(GCKind.RC_RECYCLE, new RCRecycler());
 		_actions.put(GCKind.SMART, _msGC);
+		SmartAgent.init(_workings);
 	}
 	
 	private GCController(){

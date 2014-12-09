@@ -21,12 +21,12 @@ public class AlloInst extends BaseInst{
 		_inst = toString();
 		// =======================================	
 		if(SmartAgent.getAgent().isProfilePhase()){
-			if(heap.allocate(size, _payLoad, _pointers, _objectId, _threadId) ==-1){
+			if(heap.allocate(size, _payLoad, _pointers, _objectId, _threadId, this) ==-1){
 				System.err.print("Out of Memory: "+ this.toString()+"   "+heap.toString());
 				System.exit(-1);
 			}
 		}else{
-			if(heap.allocate(this)==-1 || heap.allocate(size, _payLoad, _pointers, _objectId, _threadId) ==-1){
+			if(heap.allocate(this)==-1){
 				System.err.print("Out of Memory: "+ this.toString()+"   "+heap.toString());
 				System.exit(-1);
 			}

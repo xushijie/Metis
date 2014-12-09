@@ -78,7 +78,7 @@ abstract public class Node {
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
-		builder.append(" id:").append(_id).append(",start:").append(_start);
+		builder.append(" id:").append(_id).append(",start:").append(_start).append(",len:"+_length);
 		return builder.toString();
 		
 	}

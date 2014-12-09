@@ -1,14 +1,22 @@
 package vm.memory.simulator.smartallocation;
 
 import vm.memory.simulator.Heap;
+import vm.memory.simulator.HeapNode;
 import vm.memory.simulator.Node;
 import vm.memory.simulator.ObjectNode;
 import vm.memory.simulator.ThreadPool;
 
 public class GroupRegion extends Heap {
 	
+	private int  _regionStart;
+	private int  _regionSize;
+	
 	public GroupRegion(int start, int size){
-		super(start, size);
+		super(start, size, true);
+		_isRegion = true;
+		_regionStart = start;
+		_regionSize = size;
+		_freeList.add(new HeapNode(start, size));
 	}
 	
 	/**
@@ -45,5 +53,17 @@ public class GroupRegion extends Heap {
 		_occupiedSize+=node.getLength();
 		
 		return address;
+	}
+	
+	@Override
+	public int getSize(){
+		return _regionSize;
+	}
+
+	@Override
+	public String toString(){
+		StringBuilder builder = new StringBuilder();
+		builder.append("start:"+_regionStart+" len:"+_regionSize);
+		return builder.toString();
 	}
 }

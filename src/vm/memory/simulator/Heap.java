@@ -15,13 +15,20 @@ public class Heap implements IHeapManagement{
 	protected static int _size;
 	
 	static int _gcReduced;
-	protected static int _occupiedSize;
+	protected int _occupiedSize;
 	protected static double _p;  // increase heap by fraction p
 	protected  static double _t;  //leave more than the fraction t with live object, increase heap size by p.
 	static public GCKind _gcKind;
 	
-	List<Node> _freeList = new LinkedList<Node>();
+	protected List<Node> _freeList = new LinkedList<Node>();
 	protected Map<Integer, Node> _workingNodes = new LinkedHashMap<Integer, Node>();
+	
+	//原先区域最大的范围。。防止和RegionBlock重合。。
+	//只有每次申请的时候会赋值下，GC的时候减少少。regionGroup时候检查下。。
+	//只有对Smart_Allocation 有作用。
+	//protected int _left_header = 0;
+	//protected int _right_header=_size-1;
+	protected boolean _isRegion = false;
 	
 	
 	private static  Heap _instance = null;
@@ -42,12 +49,15 @@ public class Heap implements IHeapManagement{
 	//This is field is only used by SmartAllocation.
 	private int _startAddress =0;
 	protected Heap(int start, int size){
-		_size = size;
 		_startAddress = start;
 		_freeList.add(new HeapNode(_startAddress,_size));
 		
 	}
 	
+	protected Heap(int start, int size, boolean isRegion){
+		this(start, size);
+		_isRegion = isRegion;
+	}
 	
 	/**
 	 *  Increase Current heap size _size*p. 
@@ -87,8 +97,7 @@ public class Heap implements IHeapManagement{
 			if(gckind.equals(GCKind.COPY_REFERENCE)){
 				_instance = new CopyGCHeap();
 			}else if(gckind.equals(GCKind.SMART)){
-				int size = (int) (_size * _t);
-				_instance = new SmartHeap(size);
+				_instance = new SmartHeap(_size);
 			}else{
 				return getHeap();
 			}
@@ -107,8 +116,8 @@ public class Heap implements IHeapManagement{
 	/////////////////////////////////////////////
 	
 	protected boolean isIncreaseHeapSize(){
-		return 1.0* _occupiedSize/_size > _t;
-		//return false;
+		//return 1.0* _occupiedSize/_size > _t;
+		return false;
 	}
 	
 	public int allocate(int numBytes, int payout, int referencesCount, int id, int threadId){
@@ -125,7 +134,9 @@ public class Heap implements IHeapManagement{
 			GCController.getGCController().run(_gcKind);
 			System.out.println("Inst number: "+ AlloInst._count+" Instruction: "+ AlloInst._inst
 					           +" heap size: " + _size + " live_Object_size_before GC: " + gcBefore 
-						       +" live_object_size_after_gc: " + (_occupiedSize));
+						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion);
+			
+//			calculateLeftHeader();
 			/* I need to confirm whether the critical understanding..*/
 			if(isIncreaseHeapSize()){
 				increaseHeap();
@@ -137,24 +148,41 @@ public class Heap implements IHeapManagement{
 		
 		ObjectNode node = new ObjectNode(ThreadPool.getThread(threadId), payout,referencesCount,
 					id, address);
-		//SmartAgent.getAgent().run(node);
+		
 		if(instr!=null){
 			node.setPC(instr);
 		}
 		_workingNodes.put(node.getId(), node);
-		_occupiedSize+=node.getLength();
+		if(!_isRegion){
+			_occupiedSize+=node.getLength();	
+		}
+		
 		
 		return address;
 		
 	}
 	
+//	private void calculateLeftHeader() {
+//		if(_gcKind != GCKind.SMART) return ;
+//		_left_header = 0;
+//		for(Node no: this._workingNodes.values()){
+//			ObjectNode node = (ObjectNode) no;
+//			if(_left_header < node.getStartAddress()+node.getLength()){
+//				_left_header = node.getStartAddress() + node.getLength();
+//			}
+//		}
+//	}
+
 	public boolean free(int id){
 		Node node = _workingNodes.remove(id);
 		if(node == null){ 
 			System.err.println("free id:  "+ id);
 			return false;
 		}
-		_occupiedSize -= node.getLength();
+		if(!_isRegion){
+			_occupiedSize -= node.getLength();	
+		}
+		
 		//System.out.println("Object is deallocated: "+ node.getId());
 		return free(node.getStartAddress(), node.getLength());
 	}
@@ -208,13 +236,31 @@ public class Heap implements IHeapManagement{
 			if(node.getLength()>numBytes){
 				int address = node.getStartAddress();
 				node.allocate(numBytes);
+//				if(this._gcKind == GCKind.SMART && _isRegion == false){
+//					//The changed of left_header and right_header only available during allocation in original areas. 
+//					// It should be done inside of one region(isRegion == true)
+//					if(address+numBytes > _right_header){
+//						return -1;
+//					}
+//					if(address+numBytes > _left_header){
+//						_left_header  = address+numBytes;
+//					}
+//				}
 				return address;
+				
 			}else if(node.getLength() == numBytes){
 				int address = node.getStartAddress();
+//				if(this._gcKind == GCKind.SMART && _isRegion == false){
+//					if(address+numBytes > _right_header){
+//						return -1;
+//					}
+//					if(address+numBytes > _left_header){
+//						_left_header  = address + numBytes;
+//					}
+//				}
 				iter.remove();
 				return address;
 			}
-			
 		}
 		return -1;
 	}
@@ -246,12 +292,36 @@ public class Heap implements IHeapManagement{
 				//System.out.println("GC object id: "+ node.getId()+ " size: "+ node.getLength());
 				iter.remove();
 				_occupiedSize -= node.getLength();
+				SmartAgent.getAgent().run((ObjectNode)node);
 				free(node.getStartAddress(), node.getLength());
+				
 			}
 		}
 	}
 
 	public int allocate(BaseInst instr) {
 		return -1;
+	}
+
+	public void clear() {
+		_freeList.clear();
+		_freeList.add(new HeapNode(0,_size));
+		_workingNodes.clear();
+//		_left_header = 0;
+//		_right_header = _size - 1;
+		_occupiedSize =0 ;
+		
+	}
+	
+	protected int getStartAddress(){
+		return _startAddress;
+	}
+	
+	protected int getSize(){
+		return _size;
+	}
+	
+	protected int getFreeSize() {
+		return _size - _occupiedSize;
 	}
 }
