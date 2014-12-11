@@ -1,6 +1,11 @@
 package vm.memory.simulator;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+
+import vm.memory.simulator.gc.statistic.Tools;
 
 
 public class Main {
@@ -32,6 +37,25 @@ public class Main {
 		Heap.init(size, p, t, kind);
 		new VirtualMachine(fileName);
 		System.out.println("execution complete ");
+		output(fileName);
+		
+	}
+	
+	public static void output(String fileName){
+		File file = new File(fileName);
+		String dirName = file.getName().substring(0, file.getName().indexOf("."));
+		File output = new File("/tmp/"+dirName+".tra");
+		try {
+			BufferedWriter writer = new BufferedWriter(new FileWriter(output));
+			writer.write(Tools.getTools().toString());
+			writer.close();
+			
+				
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 }

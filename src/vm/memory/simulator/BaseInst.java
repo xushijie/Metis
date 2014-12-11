@@ -30,6 +30,7 @@ public abstract class BaseInst implements IInstruction {
 	
 	protected int _pc;
 	protected InstructionLoader _loader = null;
+	protected  int _goto;
 	
 	private static Map<String, Action> constmap = new LinkedHashMap<String, Action>();
 	
@@ -62,7 +63,7 @@ public abstract class BaseInst implements IInstruction {
 			}else if(constmap.keySet().contains(str.trim().toLowerCase())){
 				_action =  constmap.get(str.toLowerCase());
 			}else if(_action == Action.JMP){
-					_pc = Integer.parseInt(str);
+				_goto = Integer.parseInt(str);
 			}
 		}
 	}
@@ -70,11 +71,14 @@ public abstract class BaseInst implements IInstruction {
 	public BaseInst(String line, int pc){
 		
 		this(line);
-		if(pc==-1){
-			//If it is not JMP instruction, then the _pc to the next instruction address.
-			_pc = pc;
-		}
-		
+//		if(pc!=-1){
+//			//If it is not JMP instruction, then the _pc to the next instruction address.
+//			_pc = pc;
+//		}
+	}
+	
+	public void setPC(int pc){
+		_pc = pc;
 	}
 	
 	@Override

@@ -14,8 +14,8 @@ public class JmpInst extends BaseInst {
 	@Override
 	protected void execute() {
 		try {
-			if(SmartAgent.getAgent().isProfilePhase()){
-				_loader.gotoAddress(_pc);
+			if(SmartAgent.getAgent().isProfilePhase() || count <2){
+				_loader.gotoAddress(_goto);
 			}
 			
 			if(count++>=1){

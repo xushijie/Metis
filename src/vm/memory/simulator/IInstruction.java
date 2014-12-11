@@ -11,4 +11,5 @@ public interface IInstruction {
 	public void run();
 	public Action getAction();
 	public int getPC();
+	public void setPC(int pc);
 }

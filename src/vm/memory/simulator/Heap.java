@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.Set;
 
 import vm.memory.simulator.gc.GCController;
+import vm.memory.simulator.gc.statistic.Sample;
+import vm.memory.simulator.gc.statistic.Tools;
 import vm.memory.simulator.smartallocation.SmartAgent;
 
 public class Heap implements IHeapManagement{
@@ -132,15 +134,21 @@ public class Heap implements IHeapManagement{
 			int size = this._workingNodes.size();
 			
 			GCController.getGCController().run(_gcKind);
-			System.out.println("Inst number: "+ AlloInst._count+" Instruction: "+ AlloInst._inst
+			System.out.println("Inst number: "+ instr.getPC()+" Instruction: "+ AlloInst._inst
 					           +" heap size: " + _size + " live_Object_size_before GC: " + gcBefore 
 						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion);
 			
-//			calculateLeftHeader();
 			/* I need to confirm whether the critical understanding..*/
 			if(isIncreaseHeapSize()){
 				increaseHeap();
 			}
+			
+			/**
+			 *  Make statistics
+			 */
+			Sample sample = new Sample();
+			afterGC(sample);
+			Tools.getTools().addSample(sample);
 			
 			address = allocate(numBytes);
 			if(address == -1 ) return -1;
@@ -236,28 +244,10 @@ public class Heap implements IHeapManagement{
 			if(node.getLength()>numBytes){
 				int address = node.getStartAddress();
 				node.allocate(numBytes);
-//				if(this._gcKind == GCKind.SMART && _isRegion == false){
-//					//The changed of left_header and right_header only available during allocation in original areas. 
-//					// It should be done inside of one region(isRegion == true)
-//					if(address+numBytes > _right_header){
-//						return -1;
-//					}
-//					if(address+numBytes > _left_header){
-//						_left_header  = address+numBytes;
-//					}
-//				}
 				return address;
 				
 			}else if(node.getLength() == numBytes){
 				int address = node.getStartAddress();
-//				if(this._gcKind == GCKind.SMART && _isRegion == false){
-//					if(address+numBytes > _right_header){
-//						return -1;
-//					}
-//					if(address+numBytes > _left_header){
-//						_left_header  = address + numBytes;
-//					}
-//				}
 				iter.remove();
 				return address;
 			}
@@ -289,7 +279,6 @@ public class Heap implements IHeapManagement{
 			Integer key = iter.next();
 			Node node =  _workingNodes.get(key);
 			if(!nodes.contains(node)){
-				//System.out.println("GC object id: "+ node.getId()+ " size: "+ node.getLength());
 				iter.remove();
 				_occupiedSize -= node.getLength();
 				SmartAgent.getAgent().run((ObjectNode)node);
@@ -323,5 +312,14 @@ public class Heap implements IHeapManagement{
 	
 	protected int getFreeSize() {
 		return _size - _occupiedSize;
+	}
+	
+	/**
+	 * This function collects the FreeNode distribution for future statistics. 
+	 */
+	public void afterGC(Sample sample) {
+		for(Node node: _freeList){
+			sample.addRecord(node);
+		}
 	}
 }

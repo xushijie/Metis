@@ -16,7 +16,9 @@ public class GroupRegion extends Heap {
 		_isRegion = true;
 		_regionStart = start;
 		_regionSize = size;
+		_freeList.clear();
 		_freeList.add(new HeapNode(start, size));
+		_occupiedSize = 0;
 	}
 	
 	/**
@@ -61,9 +63,13 @@ public class GroupRegion extends Heap {
 	}
 
 	@Override
+	public int getFreeSize(){
+		return _regionSize - _occupiedSize;
+	}
+	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();
-		builder.append("start:"+_regionStart+" len:"+_regionSize);
+		builder.append("start:"+_regionStart+" len:"+_regionSize).append(" Occupied:"+_occupiedSize);
 		return builder.toString();
 	}
 }

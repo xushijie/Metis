@@ -44,10 +44,13 @@ public class VirtualMachine{
 			BufferedReader reader = new BufferedReader(new FileReader(fileName));
 			String line;
 			try {
+				int i=0;
 				line = reader.readLine();
 				while(line!=null && !line.equals("")){
 					IInstruction instr = InstructionFactory.createInstruction(line, this);
+					instr.setPC(i++);
 					_insts.add(instr);
+					
 					line = reader.readLine();
 				}
 				reader.close();
