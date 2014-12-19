@@ -1,0 +1,39 @@
+Inst number: 3999 Instruction: a T1 O1091 S32 N5 heap size: 50000 live_Object_size_before GC: 49984 live_object_size_after_gc: 11872 isRegion:false
+Inst number: 7869 Instruction: a T1 O2062 S32 N5 heap size: 50000 live_Object_size_before GC: 49684 live_object_size_after_gc: 22836 isRegion:false
+Inst number: 10461 Instruction: a T1 O2788 S32 N5 heap size: 50000 live_Object_size_before GC: 49492 live_object_size_after_gc: 23372 isRegion:false
+Inst number: 13010 Instruction: a T1 O3415 S32 N5 heap size: 50000 live_Object_size_before GC: 49452 live_object_size_after_gc: 25092 isRegion:false
+Inst number: 15216 Instruction: a T1 O3959 S32 N5 heap size: 50000 live_Object_size_before GC: 49252 live_object_size_after_gc: 28748 isRegion:false
+Inst number: 17209 Instruction: a T1 O4430 S56 N9 heap size: 50000 live_Object_size_before GC: 49244 live_object_size_after_gc: 29448 isRegion:false
+Inst number: 19702 Instruction: a T1 O4917 S56 N10 heap size: 50000 live_Object_size_before GC: 49188 live_object_size_after_gc: 29084 isRegion:false
+Inst number: 23342 Instruction: a T1 O5549 S24 N4 heap size: 50000 live_Object_size_before GC: 49060 live_object_size_after_gc: 18260 isRegion:false
+Inst number: 26884 Instruction: a T1 O6302 S32 N5 heap size: 50000 live_Object_size_before GC: 49104 live_object_size_after_gc: 17160 isRegion:false
+Inst number: 29755 Instruction: a T1 O6936 S56 N9 heap size: 50000 live_Object_size_before GC: 49000 live_object_size_after_gc: 12300 isRegion:false
+This is Profile
+Inst number: 884 Instruction: a T0 O268 S56 N9 heap size: 50000 live_Object_size_before GC: 49212 live_object_size_after_gc: 10100 isRegion:false
+Inst number: 4352 Instruction: a T1 O1173 S32 N5 heap size: 50000 live_Object_size_before GC: 49528 live_object_size_after_gc: 17364 isRegion:false
+Inst number: 7645 Instruction: a T1 O1998 S32 N5 heap size: 50000 live_Object_size_before GC: 49368 live_object_size_after_gc: 27880 isRegion:false
+Inst number: 9801 Instruction: a T1 O2614 S64 N9 heap size: 50000 live_Object_size_before GC: 49140 live_object_size_after_gc: 28016 isRegion:false
+Inst number: 11811 Instruction: a T1 O3113 S56 N9 heap size: 50000 live_Object_size_before GC: 49144 live_object_size_after_gc: 29472 isRegion:false
+Inst number: 13666 Instruction: a T1 O3581 S32 N5 heap size: 50000 live_Object_size_before GC: 49076 live_object_size_after_gc: 30568 isRegion:false
+Inst number: 15300 Instruction: a T1 O3979 S64 N12 heap size: 50000 live_Object_size_before GC: 48572 live_object_size_after_gc: 33912 isRegion:false
+Inst number: 16782 Instruction: a T1 O4328 S16 N0 heap size: 50000 live_Object_size_before GC: 49184 live_object_size_after_gc: 35008 isRegion:false
+Inst number: 18117 Instruction: a T1 O4670 S56 N9 heap size: 50000 live_Object_size_before GC: 48948 live_object_size_after_gc: 35656 isRegion:false
+Inst number: 20116 Instruction: a T1 O5003 S56 N9 heap size: 50000 live_Object_size_before GC: 48916 live_object_size_after_gc: 33932 isRegion:false
+Inst number: 23108 Instruction: a T1 O5492 S32 N5 heap size: 50000 live_Object_size_before GC: 48516 live_object_size_after_gc: 22872 isRegion:false
+Inst number: 26131 Instruction: a T3 O6135 S24 N3 heap size: 50000 live_Object_size_before GC: 48996 live_object_size_after_gc: 22572 isRegion:false
+Inst number: 28595 Instruction: a T1 O6696 S40 N3 heap size: 50000 live_Object_size_before GC: 48552 live_object_size_after_gc: 20616 isRegion:false
+Inst number: 31286 Instruction: a T1 O7289 S80 N15 heap size: 50000 live_Object_size_before GC: 48956 live_object_size_after_gc: 15940 isRegion:false
+This is Activation
+Inst number: 3961 SmartHeap  occupied_size_before: 49596 occupied_region_size: 48164 group_size_before: 48568 Group_Number_before: 320 occupied_size_after: 11856 group_size_after: 26720 group number: 92 occupied_region_group_size: 10424
+Inst number: 7771 SmartHeap  occupied_size_before: 49104 occupied_region_size: 43340 group_size_before: 43964 Group_Number_before: 207 occupied_size_after: 22836 group_size_after: 29564 group number: 110 occupied_region_group_size: 20228
+Inst number: 10339 SmartHeap  occupied_size_before: 49172 occupied_region_size: 45500 group_size_before: 45952 Group_Number_before: 354 occupied_size_after: 23180 group_size_after: 29632 group number: 111 occupied_region_group_size: 20572
+Inst number: 12851 SmartHeap  occupied_size_before: 48624 occupied_region_size: 44648 group_size_before: 45644 Group_Number_before: 267 occupied_size_after: 25092 group_size_after: 30624 group number: 114 occupied_region_group_size: 21700
+Inst number: 14981 SmartHeap  occupied_size_before: 48544 occupied_region_size: 44392 group_size_before: 45384 Group_Number_before: 302 occupied_size_after: 28164 group_size_after: 34792 group number: 131 occupied_region_group_size: 24692
+Inst number: 16937 SmartHeap  occupied_size_before: 48436 occupied_region_size: 43192 group_size_before: 44272 Group_Number_before: 257 occupied_size_after: 29780 group_size_after: 35852 group number: 131 occupied_region_group_size: 25356
+Inst number: 18945 SmartHeap  occupied_size_before: 48512 occupied_region_size: 42764 group_size_before: 43776 Group_Number_before: 225 occupied_size_after: 32028 group_size_after: 36652 group number: 132 occupied_region_group_size: 27544
+Inst number: 22370 SmartHeap  occupied_size_before: 48172 occupied_region_size: 42456 group_size_before: 43860 Group_Number_before: 225 occupied_size_after: 17536 group_size_after: 32308 group number: 95 occupied_region_group_size: 14176
+Inst number: 26064 SmartHeap  occupied_size_before: 48496 occupied_region_size: 44576 group_size_before: 45640 Group_Number_before: 412 occupied_size_after: 17528 group_size_after: 31844 group number: 91 occupied_region_group_size: 13944
+Inst number: 28945 SmartHeap  occupied_size_before: 47868 occupied_region_size: 43472 group_size_before: 45252 Group_Number_before: 247 occupied_size_after: 14556 group_size_after: 29760 group number: 82 occupied_region_group_size: 11004
+This is Activation
+execution complete 
+

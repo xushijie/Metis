@@ -23,10 +23,10 @@ public class PC {
 	
 	@Override
 	public int hashCode(){
-		 return new HashCodeBuilder(17, 31). // two randomly chosen prime numbers
-		            append(_pc).
-		            append(_inst).
-		            toHashCode();
+		snewex 
+		
+		
+		
 	}
 	
 	@Override
