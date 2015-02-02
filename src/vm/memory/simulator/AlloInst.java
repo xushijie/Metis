@@ -14,7 +14,8 @@ public class AlloInst extends BaseInst{
 	@Override
 	public void execute() {
 		Heap heap = Heap.getHeap();
-		int size = _payLoad + 4 * _pointers;
+		int size =  _pointers;
+		//int size = _payLoad + 4 * _pointers;
 		
 		// =======================================
 		_count ++; 

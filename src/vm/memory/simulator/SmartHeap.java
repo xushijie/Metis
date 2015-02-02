@@ -3,7 +3,6 @@ package vm.memory.simulator;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Set;
 
 import vm.memory.simulator.gc.GCController;

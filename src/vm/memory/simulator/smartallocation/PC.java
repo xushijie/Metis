@@ -23,10 +23,10 @@ public class PC {
 	
 	@Override
 	public int hashCode(){
-		snewex 
-		
-		
-		
+		return new HashCodeBuilder(17, 37).
+			       append(_pc).
+			       append(_inst).
+			       toHashCode();
 	}
 	
 	@Override

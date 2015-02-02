@@ -15,9 +15,7 @@ public class Main {
 		
 		if(args.length != 5 ){
 			System.err.println("java Main fileName heapSize increaseRatio threashold GCkind");
-			
 			System.err.println("GCKind:  0 => Mark_swap;  1 => COPY_REFERENCE;  2=>referenceCounting+RECCYCLE");
-			
 			System.exit(-1);
 		}
 		
@@ -49,8 +47,7 @@ public class Main {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(output));
 			writer.write(Tools.getTools().toString());
 			writer.close();
-			
-				
+
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
