@@ -33,7 +33,7 @@ public class SmartHeap extends Heap{
 	 */
 	@Override
 	public int allocate(BaseInst instr){
-		int size = instr._payLoad + 4 * instr._pointers;
+		int size = Util.size(instr._payLoad, instr._pointers);
 		Group group = SmartAgent.getAgent().getProfileGroup(instr);
 		if(group == null){
 			//System.err.println("The Profile Agent does not see this instructure previous. "+instr.toString());

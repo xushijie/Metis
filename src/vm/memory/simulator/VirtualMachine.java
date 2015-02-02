@@ -71,6 +71,9 @@ public class VirtualMachine{
 				_icache.clear();
 				int i=0;
 				line = _reader.readLine();
+				while(line !=null && line.equals("") ){
+					line = _reader.readLine();
+				}
 				while(line!=null && !line.equals("") && i < BLOCK){
 					IInstruction instr = InstructionFactory.createInstruction(line, this);
 					instr.setPC(_base+i);

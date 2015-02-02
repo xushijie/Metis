@@ -24,10 +24,7 @@ public class Heap implements IHeapManagement{
 	
 	protected List<Node> _freeList = new LinkedList<Node>();
 	protected Map<Integer, Node> _workingNodes = new LinkedHashMap<Integer, Node>();
-	
-	//原先区域最大的范围。。防止和RegionBlock重合。。
-	//只有每次申请的时候会赋值下，GC的时候减少少。regionGroup时候检查下。。
-	//只有对Smart_Allocation 有作用。
+
 	//protected int _left_header = 0;
 	//protected int _right_header=_size-1;
 	protected boolean _isRegion = false;
@@ -118,8 +115,7 @@ public class Heap implements IHeapManagement{
 	/////////////////////////////////////////////
 	
 	protected boolean isIncreaseHeapSize(){
-		//return 1.0* _occupiedSize/_size > _t;
-		return false;
+		return 1.0* _occupiedSize/_size > _t;
 	}
 	
 	public int allocate(int numBytes, int payout, int referencesCount, int id, int threadId){
@@ -133,15 +129,17 @@ public class Heap implements IHeapManagement{
 			int gcBefore = _occupiedSize;
 			int size = this._workingNodes.size();
 			
+			/* I need to confirm whether the critical understanding..*/
+			if(isIncreaseHeapSize()){
+				increaseHeap();
+			}
+			
 			GCController.getGCController().run(_gcKind);
 			System.out.println("Inst number: "+ instr.getPC()+" Instruction: "+ AlloInst._inst
 					           +" heap size: " + _size + " live_Object_size_before GC: " + gcBefore 
 						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion);
 			
-			/* I need to confirm whether the critical understanding..*/
-			if(isIncreaseHeapSize()){
-				increaseHeap();
-			}
+			
 			
 			/**
 			 *  Make statistics

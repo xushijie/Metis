@@ -22,7 +22,7 @@ public class ObjectNode extends Node {
 	Set<PC> _parentPCs = new LinkedHashSet<PC>();
 	
 	public ObjectNode(MyThread thread, int payout, int references, int id, int start){
-		super(start, payout + 4* references, id);
+		super(start, Util.size(payout, references), id);
 		_thread = thread;
 		//_thread.addObj2Set(this);  //The thread is the one who creates it. This should not be added to thread's RootSet.
 		_payout = payout;
