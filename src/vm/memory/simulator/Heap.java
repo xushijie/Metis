@@ -14,6 +14,7 @@ import vm.memory.simulator.smartallocation.SmartAgent;
 
 public class Heap implements IHeapManagement{
 
+	private static int _initSize;
 	protected static int _size;
 	
 	static int _gcReduced;
@@ -33,6 +34,7 @@ public class Heap implements IHeapManagement{
 	private static  Heap _instance = null;
 	
 	protected Heap(int size){
+		_initSize = size;
 		_size = size;
 		_freeList.add(new HeapNode(0,size));
 	}
@@ -41,6 +43,7 @@ public class Heap implements IHeapManagement{
 		if(_size ==0) {
 			_size = 10000;
 		}
+		_initSize = _size;
 		_freeList.add(new HeapNode(0,_size));
 	}
 	
@@ -105,6 +108,7 @@ public class Heap implements IHeapManagement{
 	}
 	
 	public static void init(int size, double p, double t, GCKind kind) {
+		_initSize = size;
 		_size = size;		
 		_p = p;
 		_t = t;
@@ -129,17 +133,15 @@ public class Heap implements IHeapManagement{
 			int gcBefore = _occupiedSize;
 			int size = this._workingNodes.size();
 			
-			/* I need to confirm whether the critical understanding..*/
-			if(isIncreaseHeapSize()){
-				increaseHeap();
-			}
-			
 			GCController.getGCController().run(_gcKind);
 			System.out.println("Inst number: "+ instr.getPC()+" Instruction: "+ AlloInst._inst
 					           +" heap size: " + _size + " live_Object_size_before GC: " + gcBefore 
 						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion);
 			
-			
+			/* I need to confirm whether the critical understanding..*/
+			if(isIncreaseHeapSize()){
+				increaseHeap();
+			}
 			
 			/**
 			 *  Make statistics
@@ -291,6 +293,7 @@ public class Heap implements IHeapManagement{
 	}
 
 	public void clear() {
+		_size = _initSize;
 		_freeList.clear();
 		_freeList.add(new HeapNode(0,_size));
 		_workingNodes.clear();
