@@ -42,7 +42,7 @@ public class Main {
 	public static void output(String fileName){
 		File file = new File(fileName);
 		String dirName = file.getName().substring(0, file.getName().indexOf("."));
-		File output = new File("/tmp/"+dirName+".tra");
+		File output = new File(dirName+".tra");
 		try {
 			BufferedWriter writer = new BufferedWriter(new FileWriter(output));
 			writer.write(Tools.getTools().toString());
