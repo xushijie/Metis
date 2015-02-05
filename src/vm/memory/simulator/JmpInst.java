@@ -18,10 +18,10 @@ public class JmpInst extends BaseInst {
 				_loader.gotoAddress(_goto);
 			}
 			
-			//if(count++>=1){
+			if(count++>=1){
 				SmartAgent.getAgent().activate();
 				Heap.getHeap().clear();
-			//}
+			}
 			
 			System.out.println("This is "+ (SmartAgent.getAgent().isProfilePhase()?"Profile":"Activation"));
 			
