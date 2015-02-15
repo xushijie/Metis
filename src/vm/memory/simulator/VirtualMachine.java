@@ -45,7 +45,7 @@ public class VirtualMachine{
 		List<IInstruction> _icache = new ArrayList<IInstruction>();
 		
 		int _base =0;
-		public static final int BLOCK = 50000;
+		public static final int BLOCK = 2000000;
 		
 		FileInputStream _fin;
 		BufferedReader _reader ;
