@@ -66,6 +66,7 @@ public class GroupRegion extends Heap {
 	public int getFreeSize(){
 		return _regionSize - _occupiedSize;
 	}
+	
 	@Override
 	public String toString(){
 		StringBuilder builder = new StringBuilder();

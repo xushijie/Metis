@@ -14,16 +14,18 @@ public class JmpInst extends BaseInst {
 	@Override
 	protected void execute() {
 		try {
-			if(SmartAgent.getAgent().isProfilePhase() || count <2){
+			if(SmartAgent.getAgent().isProfilePhase() && count <1){
 				_loader.gotoAddress(_goto);
 			}
 			
-			if(count++>=1){
+			System.out.println("This is "+ (SmartAgent.getAgent().isProfilePhase()?"Profile":"Activation"));	
+			count++;
+			if( count ==1){
 				SmartAgent.getAgent().activate();
 				Heap.getHeap().clear();
 			}
 			
-			System.out.println("This is "+ (SmartAgent.getAgent().isProfilePhase()?"Profile":"Activation"));
+
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

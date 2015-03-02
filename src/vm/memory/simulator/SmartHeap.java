@@ -46,7 +46,7 @@ public class SmartHeap extends Heap{
 				if(start ==-1) {
 					/**
 					 *  Insufficient space for whole region allocation..
-					 *  Go to default way..
+					 *  Go to default way..GroupRegion region = _groups.get(group);
 					 */
 					return defaultAllocation(size, instr._payLoad, instr._pointers, instr._objectId, instr._threadId, instr.getPC());
 				}
@@ -94,11 +94,15 @@ public class SmartHeap extends Heap{
 			int gcBefore = _occupiedSize;
 			int groupSizeBefore = 0;
 			int occupiedgroupSizeBefore = 0;
+			int freeSize_number = _freeList.size();
+			int regionGroup_freeSize_numberbefore = 0;
 			for(Map.Entry<Group, GroupRegion> entry: _groups.entrySet()){
 				groupSizeBefore+=entry.getValue().getSize();
 				occupiedgroupSizeBefore+=(entry.getValue().getSize()-entry.getValue().getFreeSize());
+				regionGroup_freeSize_numberbefore+=entry.getValue().getFreeSizeNumber();
 			}
 			int groupNumber = _groups.entrySet().size();
+			
 			/**
 			 *  The output format: 
 			 *  Inst Number, "HeapSize" 
@@ -110,10 +114,13 @@ public class SmartHeap extends Heap{
 			
 			int groupSize=0;
 			int occupiedgroupSize = 0;
+			int regionGroup_freeSize_numberafter = 0;
 			for(Map.Entry<Group, GroupRegion> entry: _groups.entrySet()){
 				groupSize+=entry.getValue().getSize();
 				occupiedgroupSize+=(entry.getValue().getSize()-entry.getValue().getFreeSize());
+				regionGroup_freeSize_numberafter+= entry.getValue().getFreeSizeNumber();
 			}
+			
 			
 			/**
 			 * Make statistics.
@@ -126,7 +133,7 @@ public class SmartHeap extends Heap{
 					            " occupied_size_before: " + gcBefore +  " occupied_region_size: "+occupiedgroupSizeBefore+
 					            " group_size_before: " + groupSizeBefore+" Group_Number_before: "+groupNumber+
 					            " occupied_size_after: "+_occupiedSize+" group_size_after: "+groupSize+
-						       " group number: "+ _groups.entrySet().size()+ " occupied_region_group_size: "+occupiedgroupSize);
+						       " group number: "+ _groups.entrySet().size()+ " occupied_region_group_size: "+occupiedgroupSize + " FreeList_number_gloabl_beforeGC: "+freeSize_number+ " regiongroupFreeSize_number_beforeGC:  "+regionGroup_freeSize_numberbefore+" FreeList_number_after: "+ _freeList.size()+" regiongroupFreeSize_number_AfterGC： "+regionGroup_freeSize_numberafter);
 			address = allocate(size);
 			if(address == -1) {
 				for(Map.Entry<Group, GroupRegion> entry: _groups.entrySet()){

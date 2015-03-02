@@ -45,7 +45,7 @@ public class VirtualMachine{
 		List<IInstruction> _icache = new ArrayList<IInstruction>();
 		
 		int _base =0;
-		public static final int BLOCK = 2000000;
+		public static final int BLOCK = 230000;
 		
 		FileInputStream _fin;
 		BufferedReader _reader ;
@@ -82,6 +82,16 @@ public class VirtualMachine{
 					if(i==BLOCK) break;
 					line = _reader.readLine();
 				}
+				
+				/**
+				 *  This is templary solution. Only load one block with one JMP.
+				 */
+				line = "j 0";
+				
+				IInstruction instr = InstructionFactory.createInstruction(line, this);
+				instr.setPC(_base+i);
+				_icache.add(instr);
+				
 				return _icache.size()!=0;
 				//reader.close();
 			} catch (IOException e) {
@@ -106,10 +116,15 @@ public class VirtualMachine{
 		
 		public boolean hasNextInst() throws IOException{
 			if(!(_pc>=_base && _pc  < _base + _icache.size())){
-				_base +=BLOCK;
-				if(loadNextBlock() == false){
-					return false;
-				}
+				//This is Workaround
+				return false;
+				
+				//uncomment below for multiple block loading..
+//				
+//				_base +=BLOCK;
+//				if(loadNextBlock() == false){
+//					return false;
+//				}
 			}
 			return true;
 		}

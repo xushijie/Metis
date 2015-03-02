@@ -132,11 +132,12 @@ public class Heap implements IHeapManagement{
 			//Here cache _occuripedSize since GC might modify this value. 
 			int gcBefore = _occupiedSize;
 			int size = this._workingNodes.size();
+			int freeSizebefore = _freeList.size();
 			
 			GCController.getGCController().run(_gcKind);
 			System.out.println("Inst number: "+ instr.getPC()+" Instruction: "+ AlloInst._inst
 					           +" heap size: " + _size + " live_Object_size_before GC: " + gcBefore 
-						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion);
+						       +" live_object_size_after_gc: " + (_occupiedSize)+" isRegion:"+this._isRegion+"  freeList_Number_Before: "+ freeSizebefore + " FreeL_Number_after: "+ _freeList.size());
 			
 			/* I need to confirm whether the critical understanding..*/
 			if(isIncreaseHeapSize()){
@@ -315,6 +316,13 @@ public class Heap implements IHeapManagement{
 		return _size - _occupiedSize;
 	}
 	
+	/**
+	 *  This returns the number of 'holes' in the free list.
+	 * @return
+	 */
+	protected int getFreeSizeNumber(){
+		return _freeList.size();
+	}
 	/**
 	 * This function collects the FreeNode distribution for future statistics. 
 	 */

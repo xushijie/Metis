@@ -10,7 +10,7 @@ public class AlloInst extends BaseInst{
 	public AlloInst(String line, int pc){
 		super(line, pc);
 	}
-
+	
 	@Override
 	public void execute() {
 		Heap heap = Heap.getHeap();

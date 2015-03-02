@@ -1,0 +1,15 @@
+Inst number: 58850 Instruction: a T1 O12842 S96 N37 heap size: 100000 live_Object_size_before GC: 99975 live_object_size_after_gc: 16215 isRegion:false
+Inst number: 94931 Instruction: a T1 O21686 S80 N64 heap size: 100000 live_Object_size_before GC: 99683 live_object_size_after_gc: 14479 isRegion:false
+Inst number: 124232 Instruction: a T1 O28004 S280 N65 heap size: 100000 live_Object_size_before GC: 93649 live_object_size_after_gc: 23337 isRegion:false
+Inst number: 161737 Instruction: a T1 O35801 S48 N16 heap size: 100000 live_Object_size_before GC: 99764 live_object_size_after_gc: 25390 isRegion:false
+Inst number: 199500 Instruction: a T1 O45084 S48 N16 heap size: 100000 live_Object_size_before GC: 99999 live_object_size_after_gc: 24209 isRegion:false
+This is Profile
+Inst number: 57857 SmartHeap  occupied_size_before: 98024 occupied_region_size: 90569 group_size_before: 92545 Group_Number_before: 2892 occupied_size_after: 15404 group_size_after: 50625 group number: 199 occupied_region_group_size: 7965
+Inst number: 94254 SmartHeap  occupied_size_before: 99700 occupied_region_size: 81778 group_size_before: 82078 Group_Number_before: 1030 occupied_size_after: 14471 group_size_after: 53828 group number: 239 occupied_region_group_size: 6034
+Inst number: 123215 SmartHeap  occupied_size_before: 86176 occupied_region_size: 68524 group_size_before: 82336 Group_Number_before: 1370 occupied_size_after: 23337 group_size_after: 54492 group number: 246 occupied_region_group_size: 6789
+Inst number: 159207 SmartHeap  occupied_size_before: 92875 occupied_region_size: 65385 group_size_before: 72510 Group_Number_before: 1080 occupied_size_after: 25499 group_size_after: 51194 group number: 187 occupied_region_group_size: 9366
+Inst number: 190246 SmartHeap  occupied_size_before: 94733 occupied_region_size: 70697 group_size_before: 75964 Group_Number_before: 1045 occupied_size_after: 24415 group_size_after: 51189 group number: 182 occupied_region_group_size: 8122
+Inst number: 228965 SmartHeap  occupied_size_before: 97765 occupied_region_size: 75365 group_size_before: 77600 Group_Number_before: 1099 occupied_size_after: 39525 group_size_after: 58425 group number: 231 occupied_region_group_size: 22507
+This is Activation
+execution complete 
+
